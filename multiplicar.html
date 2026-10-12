@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#14332b">
+  <title>Tabla del 3</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="multiplicar.css">
+</head>
+<body>
+
+  <!-- Símbolos matemáticos decorativos (flotan con CSS, sin JavaScript) -->
+  <div class="simbolos" aria-hidden="true">
+    <span class="s s1">+</span>
+    <span class="s s2">&times;</span>
+    <span class="s s3">&divide;</span>
+    <span class="s s4">&pi;</span>
+    <span class="s s5">&radic;</span>
+    <span class="s s6">=</span>
+    <span class="s s7">&sum;</span>
+    <span class="s s8">&minus;</span>
+    <span class="s s9">3</span>
+    <span class="s s10">&infin;</span>
+    <span class="s s11">&times;</span>
+    <span class="s s12">%</span>
+  </div>
+
+  <header class="superior">
+    <!-- Botón sin JavaScript: el formulario lleva a la tabla (#tabla) y el CSS la resalta con :target -->
+    <form action="#tabla">
+      <button type="submit" class="boton">PROBAR</button>
+    </form>
+  </header>
+
+  <main class="contenedor">
+    <p class="formula" aria-hidden="true">3 &times; n = ?</p>
+    <h1>Tabla del 3</h1>
+    <p class="subtitulo">Multiplica el 3 por cada número del 1 al 10.</p>
+
+    <section id="tabla" class="pizarra" aria-label="Tabla de multiplicar del 3">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Operación</th>
+            <th scope="col">Resultado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>3 &times; 1</td><td>3</td></tr>
+          <tr><td>3 &times; 2</td><td>6</td></tr>
+          <tr><td>3 &times; 3</td><td>9</td></tr>
+          <tr><td>3 &times; 4</td><td>12</td></tr>
+          <tr><td>3 &times; 5</td><td>15</td></tr>
+          <tr><td>3 &times; 6</td><td>18</td></tr>
+          <tr><td>3 &times; 7</td><td>21</td></tr>
+          <tr><td>3 &times; 8</td><td>24</td></tr>
+          <tr><td>3 &times; 9</td><td>27</td></tr>
+          <tr><td>3 &times; 10</td><td>30</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <p class="pie" aria-hidden="true">3 &times; 2 = 2 &times; 3 &nbsp;&middot;&nbsp; &sum; = 165</p>
+  </main>
+
+</body>
+</html>

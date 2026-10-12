@@ -1,0 +1,295 @@
+/* ---------- Variables ---------- */
+:root {
+  --pizarra: #14332b;
+  --pizarra-oscura: #0d221c;
+  --tiza: #f4f1e8;
+  --tiza-suave: rgba(244, 241, 232, 0.72);
+  --amarillo: #ffd75e;
+  --celeste: #7fd6ff;
+  --rosa: #ff9fb8;
+  --marco: #8a5a2b;
+
+  --manuscrita: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
+  --texto: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--tiza);
+  font-family: var(--texto);
+  line-height: 1.5;
+  /* Pizarra con cuadrícula suave, como un cuaderno */
+  background-color: var(--pizarra);
+  background-image:
+    radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.35) 100%),
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: auto, 32px 32px, 32px 32px;
+  background-attachment: fixed;
+}
+
+/* ---------- Símbolos flotantes ---------- */
+.simbolos {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.s {
+  position: absolute;
+  font: 700 clamp(2.5rem, 7vw, 5rem)/1 var(--manuscrita);
+  opacity: 0.16;
+  animation: flotar 9s ease-in-out infinite;
+  user-select: none;
+}
+
+.s1  { top: 12%; left: 6%;  color: var(--amarillo); animation-delay: 0s; }
+.s2  { top: 22%; right: 8%; color: var(--celeste);  animation-delay: -2s; }
+.s3  { top: 48%; left: 3%;  color: var(--rosa);     animation-delay: -4s; }
+.s4  { top: 62%; right: 6%; color: var(--amarillo); animation-delay: -1s; font-size: clamp(3rem, 9vw, 6.5rem); }
+.s5  { top: 80%; left: 12%; color: var(--celeste);  animation-delay: -5s; }
+.s6  { top: 35%; left: 90%; color: var(--tiza);     animation-delay: -3s; }
+.s7  { top: 86%; right: 18%; color: var(--rosa);    animation-delay: -6s; }
+.s8  { top: 8%;  left: 42%; color: var(--tiza);     animation-delay: -7s; }
+.s9  { top: 70%; left: 45%; color: var(--amarillo); animation-delay: -2.5s; font-size: clamp(4rem, 11vw, 8rem); opacity: 0.08; }
+.s10 { top: 30%; left: 20%; color: var(--celeste);  animation-delay: -8s; }
+.s11 { top: 92%; left: 70%; color: var(--amarillo); animation-delay: -4.5s; }
+.s12 { top: 55%; left: 78%; color: var(--rosa);     animation-delay: -1.5s; }
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50%      { transform: translateY(-22px) rotate(8deg); }
+}
+
+/* ---------- Parte superior con el botón ---------- */
+.superior {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  padding: 0.85rem 1rem;
+  background: linear-gradient(#a06a35, var(--marco));
+  border-bottom: 4px solid #5e3a17;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.boton {
+  padding: 0.7rem 2.6rem;
+  border: 2px dashed var(--pizarra-oscura);
+  border-radius: 12px;
+  background: var(--amarillo);
+  color: var(--pizarra-oscura);
+  font: 800 1.05rem/1 var(--texto);
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #c79a1d;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+}
+
+.boton:hover {
+  background: #ffe28a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #c79a1d;
+}
+
+.boton:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #c79a1d;
+}
+
+.boton:focus-visible {
+  outline: 3px solid var(--tiza);
+  outline-offset: 3px;
+}
+
+/* ---------- Contenido ---------- */
+.contenedor {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 34rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+  text-align: center;
+}
+
+.formula {
+  margin: 0;
+  color: var(--celeste);
+  font: 600 clamp(1.6rem, 5vw, 2.2rem)/1.2 var(--manuscrita);
+  animation: aparecer 0.8s ease both;
+}
+
+h1 {
+  margin: 0.1rem 0 0.2rem;
+  color: var(--amarillo);
+  font: 700 clamp(3rem, 12vw, 5rem)/1 var(--manuscrita);
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
+  animation: aparecer 0.8s 0.1s ease both;
+}
+
+.subtitulo {
+  margin: 0 0 1.6rem;
+  color: var(--tiza-suave);
+  font-size: 1rem;
+  animation: aparecer 0.8s 0.2s ease both;
+}
+
+/* ---------- Pizarra con la tabla ---------- */
+.pizarra {
+  overflow: hidden;
+  border: 8px solid var(--marco);
+  border-radius: 10px;
+  background: var(--pizarra-oscura);
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, 0.6),
+    0 10px 28px rgba(0, 0, 0, 0.5);
+  scroll-margin-top: 5.5rem;
+  transition: box-shadow 0.3s, border-color 0.3s;
+}
+
+/* Al presionar PROBAR, la pizarra se ilumina */
+.pizarra:target {
+  border-color: var(--amarillo);
+  box-shadow:
+    inset 0 0 30px rgba(0, 0, 0, 0.6),
+    0 0 0 3px rgba(255, 215, 94, 0.35),
+    0 10px 28px rgba(0, 0, 0, 0.5);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(1.1rem, 4.4vw, 1.4rem);
+}
+
+thead th {
+  padding: 0.9rem 0.5rem;
+  border-bottom: 2px dashed var(--tiza-suave);
+  color: var(--celeste);
+  font: 600 clamp(1.4rem, 5vw, 1.8rem)/1.2 var(--manuscrita);
+  letter-spacing: 0.04em;
+}
+
+tbody td {
+  padding: 0.65rem 0.5rem;
+  border-bottom: 1px dashed rgba(244, 241, 232, 0.2);
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Operación: "3 × 1 =" */
+tbody td:first-child {
+  color: var(--tiza);
+  font-weight: 700;
+}
+
+tbody td:first-child::after {
+  content: " =";
+  color: var(--rosa);
+}
+
+/* Resultado: escrito con tiza amarilla */
+tbody td:last-child {
+  color: var(--amarillo);
+  font: 700 clamp(1.7rem, 6vw, 2.1rem)/1.1 var(--manuscrita);
+}
+
+tbody tr {
+  transition: background 0.2s;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+tbody tr:hover {
+  background: rgba(127, 214, 255, 0.14);
+}
+
+/* PROBAR: las filas se escriben una por una */
+.pizarra:target tbody tr {
+  animation: escribir 0.5s ease both;
+}
+
+.pizarra:target tbody tr:nth-child(1)  { animation-delay: 0.05s; }
+.pizarra:target tbody tr:nth-child(2)  { animation-delay: 0.15s; }
+.pizarra:target tbody tr:nth-child(3)  { animation-delay: 0.25s; }
+.pizarra:target tbody tr:nth-child(4)  { animation-delay: 0.35s; }
+.pizarra:target tbody tr:nth-child(5)  { animation-delay: 0.45s; }
+.pizarra:target tbody tr:nth-child(6)  { animation-delay: 0.55s; }
+.pizarra:target tbody tr:nth-child(7)  { animation-delay: 0.65s; }
+.pizarra:target tbody tr:nth-child(8)  { animation-delay: 0.75s; }
+.pizarra:target tbody tr:nth-child(9)  { animation-delay: 0.85s; }
+.pizarra:target tbody tr:nth-child(10) { animation-delay: 0.95s; }
+
+@keyframes escribir {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.pie {
+  margin: 1.6rem 0 0;
+  color: var(--tiza-suave);
+  font: 600 clamp(1.3rem, 4.5vw, 1.7rem)/1.2 var(--manuscrita);
+}
+
+/* ---------- Responsive ---------- */
+@media (min-width: 768px) {
+  .contenedor {
+    padding-top: 3rem;
+  }
+
+  .pizarra {
+    border-width: 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .boton {
+    width: 100%;
+    padding-inline: 1rem;
+  }
+
+  .pizarra {
+    border-width: 6px;
+  }
+}
+
+/* ---------- Accesibilidad: menos movimiento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
