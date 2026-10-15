@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#14332b">
-  <title>Tabla del 3</title>
+  <title>Tablas de Multiplicar</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="multiplicar.css">
 </head>
 <body>
 
-  <!-- Símbolos matemáticos decorativos (flotan con CSS, sin JavaScript) -->
+  <!-- Símbolos matemáticos flotantes (decorativos) -->
   <div class="simbolos" aria-hidden="true">
     <span class="s s1">+</span>
     <span class="s s2">&times;</span>
@@ -23,25 +23,56 @@
     <span class="s s6">=</span>
     <span class="s s7">&sum;</span>
     <span class="s s8">&minus;</span>
-    <span class="s s9">3</span>
+    <span class="s s9">5</span>
     <span class="s s10">&infin;</span>
     <span class="s s11">&times;</span>
     <span class="s s12">%</span>
   </div>
 
-  <header class="superior">
-    <!-- Botón sin JavaScript: el formulario lleva a la tabla (#tabla) y el CSS la resalta con :target -->
-    <form action="#tabla">
-      <button type="submit" class="boton">PROBAR</button>
-    </form>
+  <!-- Header fijo con controles -->
+  <header class="header" role="banner">
+    <div class="header-inner">
+
+      <span class="header-label">Tabla del</span>
+
+      <div class="input-wrap">
+        <span class="input-icon">✕</span>
+        <input
+          type="number"
+          id="txtNumero"
+          placeholder="5"
+          min="1"
+          max="999"
+          aria-label="Número para la tabla"
+        >
+      </div>
+
+      <nav class="quick-nums" aria-label="Accesos rápidos">
+        <button class="qn" data-n="2">2</button>
+        <button class="qn" data-n="3">3</button>
+        <button class="qn" data-n="4">4</button>
+        <button class="qn" data-n="5">5</button>
+        <button class="qn" data-n="6">6</button>
+        <button class="qn" data-n="7">7</button>
+        <button class="qn" data-n="8">8</button>
+        <button class="qn" data-n="9">9</button>
+        <button class="qn" data-n="10">10</button>
+        <button class="qn" data-n="12">12</button>
+      </nav>
+
+      <button class="btn-generar" onclick="generarTabla()">GENERAR</button>
+
+    </div>
   </header>
 
-  <main class="contenedor">
-    <p class="formula" aria-hidden="true">3 &times; n = ?</p>
-    <h1>Tabla del 3</h1>
-    <p class="subtitulo">Multiplica el 3 por cada número del 1 al 10.</p>
+  <!-- Contenido principal -->
+  <main class="main">
 
-    <section id="tabla" class="pizarra" aria-label="Tabla de multiplicar del 3">
+    <p  class="hero-formula" id="heroFormula" aria-hidden="true">5 &times; n = ?</p>
+    <h1 class="hero-titulo"  id="heroTitulo">Tablas de multiplicar</h1>
+    <p  class="hero-sub"     id="heroSub"></p>
+
+    <section class="pizarra" aria-label="Tabla de multiplicar" id="pizarra">
       <table>
         <thead>
           <tr>
@@ -49,25 +80,18 @@
             <th scope="col">Resultado</th>
           </tr>
         </thead>
-        <tbody>
-          <tr><td>3 &times; 1</td><td>3</td></tr>
-          <tr><td>3 &times; 2</td><td>6</td></tr>
-          <tr><td>3 &times; 3</td><td>9</td></tr>
-          <tr><td>3 &times; 4</td><td>12</td></tr>
-          <tr><td>3 &times; 5</td><td>15</td></tr>
-          <tr><td>3 &times; 6</td><td>18</td></tr>
-          <tr><td>3 &times; 7</td><td>21</td></tr>
-          <tr><td>3 &times; 8</td><td>24</td></tr>
-          <tr><td>3 &times; 9</td><td>27</td></tr>
-          <tr><td>3 &times; 10</td><td>30</td></tr>
-        </tbody>
+        <tbody id="divTabla"></tbody>
       </table>
     </section>
 
-    <p class="pie" aria-hidden="true">3 &times; 2 = 2 &times; 3 &nbsp;&middot;&nbsp; &sum; = 165</p>
+    <div class="datos-pie" id="datosPie" aria-live="polite"></div>
+
   </main>
-  <footer class="creditos">
+
+  <footer class="footer">
     <p>Creado por: <strong>Juan David Llibri</strong></p>
   </footer>
+
+  <script src="multiplicar.js"></script>
 </body>
 </html>

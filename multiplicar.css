@@ -1,19 +1,55 @@
-/* ---------- Variables ---------- */
-:root {
-  --pizarra: #14332b;
-  --pizarra-oscura: #0d221c;
-  --tiza: #f4f1e8;
-  --tiza-suave: rgba(244, 241, 232, 0.72);
-  --amarillo: #ffd75e;
-  --celeste: #7fd6ff;
-  --rosa: #ff9fb8;
-  --marco: #8a5a2b;
 
-  --manuscrita: "Caveat", "Segoe Print", "Comic Sans MS", cursive;
-  --texto: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+:root {
+  --bg:        #14332b;
+  --bg-deep:   #0d221c;
+  --chalk:     #f4f1e8;
+  --chalk-dim: rgba(244, 241, 232, 0.65);
+  --gold:      #ffd75e;
+  --sky:       #7fd6ff;
+  --rose:      #ff9fb8;
+  --wood:      #8a5a2b;
+  --wood-dk:   #5e3a17;
+  --wood-top:  #a06a35;
+  --card-bg:   rgba(0, 0, 0, 0.28);
+  --row-alt:   rgba(255, 255, 255, 0.04);
+  --row-hov:   rgba(127, 214, 255, 0.13);
+
+  --hand: "Caveat", "Segoe Print", cursive;
+  --ui:   "Nunito", system-ui, sans-serif;
 }
 
-/* ---------- Base ---------- */
+/* Modo claro */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg:        #e8e0c8;
+    --bg-deep:   #d4c9aa;
+    --chalk:     #1a2e26;
+    --chalk-dim: rgba(26, 46, 38, 0.60);
+    --gold:      #b07800;
+    --sky:       #1a6a9a;
+    --rose:      #b03060;
+    --card-bg:   rgba(255, 255, 255, 0.55);
+    --row-alt:   rgba(0, 0, 0, 0.04);
+    --row-hov:   rgba(26, 106, 154, 0.10);
+    color-scheme: light;
+  }
+}
+
+:root[data-theme="light"] {
+  --bg:        #e8e0c8;
+  --bg-deep:   #d4c9aa;
+  --chalk:     #1a2e26;
+  --chalk-dim: rgba(26, 46, 38, 0.60);
+  --gold:      #b07800;
+  --sky:       #1a6a9a;
+  --rose:      #b03060;
+  --card-bg:   rgba(255, 255, 255, 0.55);
+  --row-alt:   rgba(0, 0, 0, 0.04);
+  --row-hov:   rgba(26, 106, 154, 0.10);
+  color-scheme: light;
+}
+
+/* ─── Reset base ────────────────────────────────────────────── */
 *,
 *::before,
 *::after {
@@ -25,24 +61,21 @@ html {
 }
 
 body {
-  position: relative;
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
-  color: var(--tiza);
-  font-family: var(--texto);
-  line-height: 1.5;
-  /* Pizarra con cuadrícula suave, como un cuaderno */
-  background-color: var(--pizarra);
+  font-family: var(--ui);
+  color: var(--chalk);
+  background-color: var(--bg);
   background-image:
-    radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.35) 100%),
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: auto, 32px 32px, 32px 32px;
+    radial-gradient(ellipse at center, transparent 40%, rgba(0, 0, 0, 0.32) 100%),
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: auto, 30px 30px, 30px 30px;
   background-attachment: fixed;
 }
 
-/* ---------- Símbolos flotantes ---------- */
+/* ─── Símbolos flotantes ────────────────────────────────────── */
 .simbolos {
   position: fixed;
   inset: 0;
@@ -53,258 +86,336 @@ body {
 
 .s {
   position: absolute;
-  font: 700 clamp(2.5rem, 7vw, 5rem)/1 var(--manuscrita);
-  opacity: 0.16;
+  font: 700 clamp(2rem, 6vw, 4.5rem) / 1 var(--hand);
+  opacity: 0.13;
   animation: flotar 9s ease-in-out infinite;
   user-select: none;
 }
 
-.s1  { top: 12%; left: 6%;  color: var(--amarillo); animation-delay: 0s; }
-.s2  { top: 22%; right: 8%; color: var(--celeste);  animation-delay: -2s; }
-.s3  { top: 48%; left: 3%;  color: var(--rosa);     animation-delay: -4s; }
-.s4  { top: 62%; right: 6%; color: var(--amarillo); animation-delay: -1s; font-size: clamp(3rem, 9vw, 6.5rem); }
-.s5  { top: 80%; left: 12%; color: var(--celeste);  animation-delay: -5s; }
-.s6  { top: 35%; left: 90%; color: var(--tiza);     animation-delay: -3s; }
-.s7  { top: 86%; right: 18%; color: var(--rosa);    animation-delay: -6s; }
-.s8  { top: 8%;  left: 42%; color: var(--tiza);     animation-delay: -7s; }
-.s9  { top: 70%; left: 45%; color: var(--amarillo); animation-delay: -2.5s; font-size: clamp(4rem, 11vw, 8rem); opacity: 0.08; }
-.s10 { top: 30%; left: 20%; color: var(--celeste);  animation-delay: -8s; }
-.s11 { top: 92%; left: 70%; color: var(--amarillo); animation-delay: -4.5s; }
-.s12 { top: 55%; left: 78%; color: var(--rosa);     animation-delay: -1.5s; }
+.s1  { top: 10%;  left: 5%;   color: var(--gold);  animation-delay: 0s }
+.s2  { top: 20%;  right: 7%;  color: var(--sky);   animation-delay: -2s }
+.s3  { top: 46%;  left: 3%;   color: var(--rose);  animation-delay: -4s }
+.s4  { top: 60%;  right: 5%;  color: var(--gold);  animation-delay: -1s;   font-size: clamp(3rem, 9vw, 6rem) }
+.s5  { top: 78%;  left: 11%;  color: var(--sky);   animation-delay: -5s }
+.s6  { top: 33%;  left: 88%;  color: var(--chalk); animation-delay: -3s }
+.s7  { top: 85%;  right: 16%; color: var(--rose);  animation-delay: -6s }
+.s8  { top: 7%;   left: 41%;  color: var(--chalk); animation-delay: -7s }
+.s9  { top: 68%;  left: 43%;  color: var(--gold);  animation-delay: -2.5s; font-size: clamp(4rem, 11vw, 7rem); opacity: 0.06 }
+.s10 { top: 28%;  left: 19%;  color: var(--sky);   animation-delay: -8s }
+.s11 { top: 91%;  left: 68%;  color: var(--gold);  animation-delay: -4.5s }
+.s12 { top: 53%;  left: 76%;  color: var(--rose);  animation-delay: -1.5s }
 
 @keyframes flotar {
-  0%, 100% { transform: translateY(0) rotate(-6deg); }
-  50%      { transform: translateY(-22px) rotate(8deg); }
+  0%,  100% { transform: translateY(0) rotate(-5deg) }
+  50%        { transform: translateY(-18px) rotate(7deg) }
 }
 
-/* ---------- Parte superior con el botón ---------- */
-.superior {
+/* ─── Header ────────────────────────────────────────────────── */
+.header {
   position: sticky;
   top: 0;
   z-index: 10;
-  display: flex;
-  justify-content: center;
-  padding: 0.85rem 1rem;
-  background: linear-gradient(#a06a35, var(--marco));
-  border-bottom: 4px solid #5e3a17;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  background: linear-gradient(180deg, var(--wood-top), var(--wood));
+  border-bottom: 4px solid var(--wood-dk);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  padding-block: 0.7rem;
+  padding-left:  16px;
+  padding-right: 16px;
 }
 
-.boton {
-  padding: 0.7rem 2.6rem;
-  border: 2px dashed var(--pizarra-oscura);
-  border-radius: 12px;
-  background: var(--amarillo);
-  color: var(--pizarra-oscura);
-  font: 800 1.05rem/1 var(--texto);
-  letter-spacing: 0.14em;
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+.header-label {
+  color: rgba(244, 241, 232, 0.75);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ─── Input número ──────────────────────────────────────────── */
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+#txtNumero {
+  width: 6rem;
+  padding: 0.55rem 0.7rem 0.55rem 2.1rem;
+  border: 2px solid rgba(244, 241, 232, 0.35);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.25);
+  color: var(--chalk);
+  font: 700 1.3rem / 1 var(--hand);
+  text-align: center;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  -moz-appearance: textfield;
+}
+
+#txtNumero::-webkit-inner-spin-button,
+#txtNumero::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+#txtNumero::placeholder {
+  color: rgba(244, 241, 232, 0.4);
+  font-size: 1rem;
+}
+
+#txtNumero:focus {
+  border-color: var(--gold);
+  background: rgba(0, 0, 0, 0.38);
+}
+
+.input-icon {
+  position: absolute;
+  left: 0.6rem;
+  color: var(--gold);
+  font-size: 1rem;
+  pointer-events: none;
+}
+
+/* ─── Botones rápidos ───────────────────────────────────────── */
+.quick-nums {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.qn {
+  min-width: 2rem;
+  padding: 0.3rem 0.5rem;
+  border: 1.5px solid rgba(244, 241, 232, 0.25);
+  border-radius: 7px;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--chalk-dim);
+  font: 700 0.85rem / 1 var(--ui);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.qn:hover {
+  background: rgba(255, 215, 94, 0.2);
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+.qn.active {
+  background: var(--gold);
+  color: var(--bg-deep);
+  border-color: var(--gold);
+}
+
+/* ─── Botón GENERAR ─────────────────────────────────────────── */
+.btn-generar {
+  padding: 0.55rem 1.6rem;
+  border: 2px dashed var(--bg-deep);
+  border-radius: 10px;
+  background: var(--gold);
+  color: var(--bg-deep);
+  font: 800 0.95rem / 1 var(--ui);
+  letter-spacing: 0.1em;
   cursor: pointer;
   box-shadow: 0 4px 0 #c79a1d;
-  transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+  transition: transform 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
 }
 
-.boton:hover {
+.btn-generar:hover {
   background: #ffe28a;
   transform: translateY(-2px);
   box-shadow: 0 6px 0 #c79a1d;
 }
 
-.boton:active {
+.btn-generar:active {
   transform: translateY(3px);
   box-shadow: 0 1px 0 #c79a1d;
 }
 
-.boton:focus-visible {
-  outline: 3px solid var(--tiza);
+.btn-generar:focus-visible {
+  outline: 3px solid var(--chalk);
   outline-offset: 3px;
 }
 
-/* ---------- Contenido ---------- */
-.contenedor {
+/* ─── Main / Contenido ──────────────────────────────────────── */
+.main {
   position: relative;
   z-index: 1;
-  width: 100%;
-  max-width: 34rem;
+  max-width: 30rem;
   margin: 0 auto;
-  padding: 2rem 1rem 3rem;
+  padding-block: 2.2rem 3.5rem;
+  padding-left:  16px;
+  padding-right: 16px;
   text-align: center;
 }
 
-.formula {
+.hero-formula {
   margin: 0;
-  color: var(--celeste);
-  font: 600 clamp(1.6rem, 5vw, 2.2rem)/1.2 var(--manuscrita);
-  animation: aparecer 0.8s ease both;
+  color: var(--sky);
+  font: 600 clamp(1.4rem, 4.5vw, 1.9rem) / 1.2 var(--hand);
+  animation: aparecer 0.7s ease both;
 }
 
-h1 {
-  margin: 0.1rem 0 0.2rem;
-  color: var(--amarillo);
-  font: 700 clamp(3rem, 12vw, 5rem)/1 var(--manuscrita);
-  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
-  animation: aparecer 0.8s 0.1s ease both;
+.hero-titulo {
+  margin: 0.1rem 0 0.15rem;
+  color: var(--gold);
+  font: 700 clamp(2.6rem, 11vw, 4.4rem) / 1 var(--hand);
+  text-shadow: 2px 3px 0 rgba(0, 0, 0, 0.3);
+  animation: aparecer 0.7s 0.08s ease both;
 }
 
-.subtitulo {
-  margin: 0 0 1.6rem;
-  color: var(--tiza-suave);
-  font-size: 1rem;
-  animation: aparecer 0.8s 0.2s ease both;
+.hero-sub {
+  margin: 0 0 1.8rem;
+  color: var(--chalk-dim);
+  font-size: 0.95rem;
+  animation: aparecer 0.7s 0.16s ease both;
 }
 
-/* ---------- Pizarra con la tabla ---------- */
+/* ─── Pizarra (contenedor de la tabla) ─────────────────────── */
 .pizarra {
-  overflow: hidden;
-  border: 8px solid var(--marco);
+  border: 8px solid var(--wood);
   border-radius: 10px;
-  background: var(--pizarra-oscura);
+  background: var(--bg-deep);
   box-shadow:
-    inset 0 0 30px rgba(0, 0, 0, 0.6),
-    0 10px 28px rgba(0, 0, 0, 0.5);
-  scroll-margin-top: 5.5rem;
-  transition: box-shadow 0.3s, border-color 0.3s;
+    inset 0 0 32px rgba(0, 0, 0, 0.55),
+    0 10px 30px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
 }
 
-/* Al presionar PROBAR, la pizarra se ilumina */
-.pizarra:target {
-  border-color: var(--amarillo);
-  box-shadow:
-    inset 0 0 30px rgba(0, 0, 0, 0.6),
-    0 0 0 3px rgba(255, 215, 94, 0.35),
-    0 10px 28px rgba(0, 0, 0, 0.5);
-}
-
+/* ─── Tabla ─────────────────────────────────────────────────── */
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: clamp(1.1rem, 4.4vw, 1.4rem);
+  font-size: clamp(1.05rem, 4vw, 1.3rem);
 }
 
 thead th {
-  padding: 0.9rem 0.5rem;
-  border-bottom: 2px dashed var(--tiza-suave);
-  color: var(--celeste);
-  font: 600 clamp(1.4rem, 5vw, 1.8rem)/1.2 var(--manuscrita);
-  letter-spacing: 0.04em;
+  padding: 0.9rem 0.5rem 0.75rem;
+  border-bottom: 2px dashed rgba(244, 241, 232, 0.22);
+  color: var(--sky);
+  font: 600 clamp(1.2rem, 4.5vw, 1.6rem) / 1.2 var(--hand);
 }
 
 tbody td {
-  padding: 0.65rem 0.5rem;
-  border-bottom: 1px dashed rgba(244, 241, 232, 0.2);
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px dashed rgba(244, 241, 232, 0.14);
 }
 
 tbody tr:last-child td {
   border-bottom: 0;
 }
 
-/* Operación: "3 × 1 =" */
-tbody td:first-child {
-  color: var(--tiza);
+.td-op {
+  color: var(--chalk);
   font-weight: 700;
+  text-align: left;
 }
 
-tbody td:first-child::after {
-  content: " =";
-  color: var(--rosa);
+.td-op .eq {
+  color: var(--rose);
 }
 
-/* Resultado: escrito con tiza amarilla */
-tbody td:last-child {
-  color: var(--amarillo);
-  font: 700 clamp(1.7rem, 6vw, 2.1rem)/1.1 var(--manuscrita);
+.td-res {
+  color: var(--gold);
+  font: 700 clamp(1.5rem, 5.5vw, 1.9rem) / 1.1 var(--hand);
+  text-align: right;
 }
 
 tbody tr {
-  transition: background 0.2s;
+  transition: background 0.18s;
 }
 
 tbody tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--row-alt);
 }
 
 tbody tr:hover {
-  background: rgba(127, 214, 255, 0.14);
+  background: var(--row-hov);
 }
 
-/* PROBAR: las filas se escriben una por una */
-.pizarra:target tbody tr {
-  animation: escribir 0.5s ease both;
+/* Animación de entrada por fila */
+.fila-nueva {
+  animation: escribir 0.4s ease both;
 }
 
-.pizarra:target tbody tr:nth-child(1)  { animation-delay: 0.05s; }
-.pizarra:target tbody tr:nth-child(2)  { animation-delay: 0.15s; }
-.pizarra:target tbody tr:nth-child(3)  { animation-delay: 0.25s; }
-.pizarra:target tbody tr:nth-child(4)  { animation-delay: 0.35s; }
-.pizarra:target tbody tr:nth-child(5)  { animation-delay: 0.45s; }
-.pizarra:target tbody tr:nth-child(6)  { animation-delay: 0.55s; }
-.pizarra:target tbody tr:nth-child(7)  { animation-delay: 0.65s; }
-.pizarra:target tbody tr:nth-child(8)  { animation-delay: 0.75s; }
-.pizarra:target tbody tr:nth-child(9)  { animation-delay: 0.85s; }
-.pizarra:target tbody tr:nth-child(10) { animation-delay: 0.95s; }
-
-@keyframes escribir {
-  from { opacity: 0; transform: translateX(-24px); }
-  to   { opacity: 1; transform: none; }
+/* ─── Datos al pie ──────────────────────────────────────────── */
+.datos-pie {
+  margin: 1.5rem 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 1.4rem;
+  flex-wrap: wrap;
 }
 
-@keyframes aparecer {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: none; }
+.dato {
+  background: var(--card-bg);
+  border: 1px solid rgba(244, 241, 232, 0.12);
+  border-radius: 10px;
+  padding: 0.5rem 1.1rem;
+  font: 600 clamp(1.1rem, 4vw, 1.4rem) / 1.2 var(--hand);
+  color: var(--chalk-dim);
 }
 
-.pie {
-  margin: 1.6rem 0 0;
-  color: var(--tiza-suave);
-  font: 600 clamp(1.3rem, 4.5vw, 1.7rem)/1.2 var(--manuscrita);
+.dato strong {
+  color: var(--sky);
+  font-weight: 700;
 }
-/* ---------- Pie de página con mi nombre ---------- */
-.creditos {
+
+/* ─── Footer ────────────────────────────────────────────────── */
+.footer {
   position: relative;
   z-index: 1;
-  padding: 1.2rem 1rem 1.6rem;
-  border-top: 4px solid #5e3a17;
-  background: linear-gradient(var(--marco), #6d4421);
-  color: var(--tiza);
-  font-size: 0.95rem;
+  border-top: 4px solid var(--wood-dk);
+  background: linear-gradient(180deg, var(--wood), #6d4421);
   text-align: center;
+  color: var(--chalk);
+  font-size: 0.9rem;
+  padding-block: 1rem 1.4rem;
+  padding-left:  16px;
+  padding-right: 16px;
 }
 
-.creditos p {
+.footer p {
   margin: 0;
 }
 
-.creditos strong {
-  color: var(--amarillo);
-  font: 700 1.5rem/1 var(--manuscrita);
-  letter-spacing: 0.03em;
-}
-/* ---------- Responsive ---------- */
-@media (min-width: 768px) {
-  .contenedor {
-    padding-top: 3rem;
-  }
-
-  .pizarra {
-    border-width: 10px;
-  }
+.footer strong {
+  color: var(--gold);
+  font: 700 1.4rem / 1 var(--hand);
 }
 
-@media (max-width: 360px) {
-  .boton {
-    width: 100%;
-    padding-inline: 1rem;
-  }
-
-  .pizarra {
-    border-width: 6px;
-  }
+/* ─── Animaciones ───────────────────────────────────────────── */
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(8px) }
+  to   { opacity: 1; transform: none }
 }
 
-/* ---------- Accesibilidad: menos movimiento ---------- */
+@keyframes escribir {
+  from { opacity: 0; transform: translateX(-20px) }
+  to   { opacity: 1; transform: none }
+}
+
+/* ─── Responsive ────────────────────────────────────────────── */
+@media (max-width: 400px) {
+  .pizarra    { border-width: 5px }
+  .quick-nums { display: none }
+}
+
+/* ─── Accesibilidad: reducir movimiento ─────────────────────── */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto }
 
   *,
   *::before,
